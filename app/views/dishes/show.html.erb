@@ -18,6 +18,16 @@
       </dd>
 
     </dl>
+    
+    <p>
+      You loved the <%= @dish.name %> at...
+        <% @dish.bookmarks.each do |bookmark| %>
+        <li class="list-group-item">
+          <a href="/bookmarks/<%= bookmark.id %>">
+            <%= bookmark.venue.name %>
+          </a>
+         <% end %>
+    </p>
 
     <div class="btn-group btn-group-justified">
       <a href="/dishes" class="btn btn-primary">
