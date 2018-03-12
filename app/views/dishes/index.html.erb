@@ -7,8 +7,6 @@
       <a href="/venues/new" class="btn btn-lg btn-success">Add a new venue</a>
     </h1>
 
-
-
 </div><div class="row mb-1">
   <div class="col-md-12">
     <%= search_form_for @q, :class => "collapse", :id => "dishes_filters" do |f| %>
@@ -103,19 +101,45 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Name</th>
+        <th>The very best...</th>
+        <th>is at...</th>
         <th>Cuisine</th>
         <th>Actions</th>
       </tr>
 
+<<<<<<< HEAD
 
+=======
+     
+      
+>>>>>>> c76d9101372b08bf9aeb9f511033e72538961d12
       <% @dishes.each do |dish| %>
       <tr>
-        <td>
+       <td>
           <a href="/dishes/<%= dish.id %>">
               <%= dish.name %>
           </a>
         </td>      
+            
+        <td>
+          <% if dish.bookmarks.present? %>
+            <a></a><%= dish.bookmarks.last.venue.name %>
+          <% else %>
+            <form action="/create_bookmark" method="post">
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+              
+              <input type="hidden" name="dish_id" value="<%= dish.id %>">
+
+              <%= select_tag(:venue_id, options_from_collection_for_select(Venue.all, :id, :name), :class => "form-control") %>
+
+              <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+              <button class="btn btn-success">
+                Create Bookmark
+              </button>
+            </form>
+          <% end %>
+        </td>
             
         <td>
           <% if dish.cuisine.present? %>
